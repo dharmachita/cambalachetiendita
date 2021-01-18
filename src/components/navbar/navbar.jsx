@@ -32,11 +32,11 @@ function Navbar({titulo, action}) {
             <div className="container">
                 <h1>{titulo}</h1>
 
-                <div class="navbar">
-                  <div class="left">
+                <div className="navbar">
+                  <div className="left">
                     <Link to={'/'}><img src="img/leaves.png" alt="Logo de la marca, dos hojas que representan un corazon"/></Link>
                   </div>
-                <div class="right">
+                <div className="right">
                   <ul>
                     {
                      menuItems.map((seccion, index) => <NavItem key={index} text={seccion.texto} url={seccion.ruta} />)   

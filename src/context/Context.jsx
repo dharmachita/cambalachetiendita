@@ -6,75 +6,79 @@ const ContextProvider = ({ children }) => {
     
   const productos = [
     {
-        id: 1,
+        id: 11,
         nombre: 'vela 1',
+        descripcion:"",
         precio: 240,
         cantidad: 1
     },
 
     {
-        id: 2,
+        id: 12,
         nombre: 'vela 2',
+        descripcion:"",
         precio: 240,
         cantidad: 2
     }
   ]
 
     const [items, setItems] = useState({
-      items: productos,
-      cantidadAgregar: 0,
-      totalQty: 0
+      itemsArr: productos,
+      totalQty: 3
     });
    
     
-    const deleteItem = (itm,qty) => {
-      const index = items.items.findIndex(
-        (find) => find.producto.id === itm.id
+    const deleteItem = (itm) => {
+      const index = items.itemsArr.findIndex(
+        (find) => find.id === itm.id
       );
-      const arr = items.items;
+      const arr = items.itemsArr;
       arr.splice(index, 1);
       setItems({
-        items: arr,
-        totalQty: items.totalQty - qty,
-        cantidadAgergar: 0
+        itemsArr: arr,
+        totalQty: items.totalQty - itm.cantidad
       });
     };
 
 
     const clear = () => {
       setItems({
-        items: [],
-        cantidadAgregar: 0,
+        itemsArr: [],
         totalQty: 0
       });
     };
   
-    const addToCart = (item) => {
-      items.items.filter((prod) => prod.producto.id === item.id).length === 0
-        ? setItems({
-            ...items,
-            items: [
-              ...items.items,
-              { producto: item, cantidad: items.cantidadAgregar }
-            ],
-            totalQty: items.totalQty + items.cantidadAgregar
-          })
-        : isInCart(item);
+    const addToCart = (itm, qty) => {
+      items.itemsArr.filter((prod) => prod.id === itm.id).length === 0? 
+      notInCart(itm,qty)
+      : isInCart(itm, qty);
     };
-  
-    const isInCart = (item) => {
-      const index = items.items.findIndex(
-        (find) => find.producto.id === item.id
+    
+    const notInCart = (itm,qty)=>{
+      setItems({
+        itemsArr: [
+          ...items.itemsArr,
+          {
+            id: itm.id,
+            nombre: itm.nombre,
+            descripcion:itm.descripcion,
+            precio: itm.precio,
+            cantidad: qty
+        }
+        ],
+        totalQty: items.totalQty + qty
+      })
+    }
+
+    const isInCart = (itm,qty) => {
+      const index = items.itemsArr.findIndex(
+        (find) => find.id === itm.id
       );
-      const arr = items.items;
-      arr[index] = {
-        ...arr[index],
-        cantidad: arr[index].cantidad + items.cantidadAgregar
-      };
+      const arr = items.itemsArr;
+      arr[index].cantidad = arr[index].cantidad+qty
       setItems({
         ...items,
-        items: arr,
-        totalQty: items.totalQty + items.cantidadAgregar
+        totalQty: items.totalQty + qty
       });
     };
 
