@@ -1,7 +1,7 @@
-
 import { GrCart } from 'react-icons/gr'; 
 import './navbar.css';
 import NavItem from '../NavItem/navitem';
+import {Link} from 'react-router-dom';
 
 
 function Navbar({titulo, action}) {
@@ -34,14 +34,14 @@ function Navbar({titulo, action}) {
 
                 <div class="navbar">
                   <div class="left">
-                    <a href="navbar.jsx"><img src="img/leaves.png" alt="Logo de la marca, dos hojas que representan un corazon"/></a>
+                    <Link to={'/'}><img src="img/leaves.png" alt="Logo de la marca, dos hojas que representan un corazon"/></Link>
                   </div>
                 <div class="right">
                   <ul>
                     {
                      menuItems.map((seccion, index) => <NavItem key={index} text={seccion.texto} url={seccion.ruta} />)   
                     }
-                    <li><a href="#" className='carrito'><GrCart /></a></li>
+                    <li><Link to={'/cart'}><GrCart /></Link></li>
                     
                   </ul>
                   

@@ -23,8 +23,6 @@ const Producto = ({titulo, precio, id}) => {
         }
     }
 
-
-
     return (
         <div className="producto">
             <img src="img/vela1.jpeg" alt="Vela de naranja y romero"/>
@@ -39,7 +37,7 @@ const Producto = ({titulo, precio, id}) => {
                 <button onClick={() => suma() } >+</button>
             </div>
 
-            <Link to={`detail/${id}`}> AQUI IRIA TU BOTON CON VER MAS</Link>
+            <Link to={`detail/${id}`}>Ver detalle...</Link>
         </div>
     )
 }

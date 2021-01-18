@@ -1,4 +1,12 @@
+import {useContext} from 'react';
+import {Context} from '../context/Context';
+
 const ProductDetail = ({item}) => {
+
+    const { 
+        addToCart
+    } = useContext(Context);
+
     return (
         <article>
             <h1>{item.nombre}</h1>
@@ -6,7 +14,7 @@ const ProductDetail = ({item}) => {
             <img src={item.foto} alt=""/>
             <p>{item.descripcion}</p>
             <p>{item.precio}</p>
-            <button>Agregar al carrito</button>
+            {/*<button onClick={addToCart(item)}>Agregar al carrito</button>*/}
         </article>
     )
 }

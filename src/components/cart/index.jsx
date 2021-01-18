@@ -1,16 +1,29 @@
 import {useContext} from 'react';
-import {Store} from '../../store';
+import {Context} from '../../context/Context';
+import CartItem from '../CartItem/CartItem';
 
 const Cart = () => {
-    const [data, setData] = useContext(Store);
+    const { items,
+            setItems,
+            addToCart,
+            deleteItem,
+            clear
+        } = useContext(Context);
 
     return (
         <>
             <p>Carrito</p>
+            <button onClick={clear}>Vaciar Carrito</button>
+            <ul>
+                {
+                    items.items.map((item,index) => 
+                    <li key={index}>
+                        <CartItem key={index} item={item} />
+                    </li>)
 
-            {
-                data.items.map(item => <h2>{item.title}</h2>)
-            }
+                }
+            </ul>
+
         </>
     )
 }
